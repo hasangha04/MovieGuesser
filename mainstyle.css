@@ -28,17 +28,17 @@ section#movies {
     padding-top: 1.2rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-
+    padding-bottom: 100px;
     font-family: "Chamberi Super Display";
 }
 
 section#movies div {
-    width: 112px;
-    height: 169px;
+    width: 133px;
+    height: 198px;
     background-color: white;
     color: black;
     text-align: center;
-    border: 2px solid #000000;
+    border: 1px solid #000000;
 }
 
 footer {
