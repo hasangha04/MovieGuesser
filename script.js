@@ -1,31 +1,38 @@
-const apiUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=18a4345bbfcdfbec6b425563892c8916';
-const moviesContainer = document.getElementById("movies");
-
-async function getMovies() {
-    try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-
-        data.results.forEach(media => {
-            const movieElement = document.createMovieElement(media);
-            moviesContainer.appendChild(movieElement);
-        });
-    } catch (error) {
-        console.log("Error fetching data: ", error);
+const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxOGE0MzQ1YmJmY2RmYmVjNmI0MjU1NjM4OTJjODkxNiIsInN1YiI6IjY1YjU2ZjM1ZjY1OTZmMDE0OWZlMTI1NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.jdYM_1YApryb3TXt18Lai08nDYKfGct2R_6tpaP1wcs'
     }
+  };
+  
+let movieDataArray = []; // Declare an array to store the response data
+let currentPage = 1; // Initialize the current page
+
+function fetchMovies(page) {
+  fetch(`https://api.themoviedb.org/3/trending/person/day?language=en-US&page=${page}`, options)
+    .then(response => response.json())
+    .then(response => {
+      const currentMovies = response.results.filter(movie => 
+        movie.known_for_department === "Acting" && 
+        movie.known_for.length > 0 && 
+        movie.known_for[0].original_language === "en"
+      );
+
+      movieDataArray = [...movieDataArray, ...currentMovies];
+
+      // Print out the 'name' property for each movie on the current page
+      currentMovies.forEach(movie => {
+        console.log(movie.name);
+      });
+
+      // Fetch the next page if available
+      if (page < response.total_pages) {
+        fetchMovies(page + 1);
+      }
+    })
+    .catch(err => console.error(err));
 }
 
-function createMovieElement(media) {
-    const {title, name, backdrop_path, release_date} = media;
-
-    const movieElement = document.createElement("div");
-    movieElement.classList.add("movie_item")
-
-    movieElement.innerHTML = `
-        <img src="https://image.tmdb.org/t/p/w500${backdrop_path}"
-        <div class="title">${title}</div>
-    `;
-    return movieElement;
-}
-
-getMovies();
+// Start fetching movies from the first page
+fetchMovies(currentPage);
