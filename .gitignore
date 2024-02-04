@@ -127,3 +127,14 @@ node_modules/web-streams-polyfill/es6/package.json
 node_modules/web-streams-polyfill/ponyfill/package.json
 node_modules/web-streams-polyfill/ponyfill/es2018/package.json
 node_modules/web-streams-polyfill/ponyfill/es6/package.json
+.env
+node_modules/dotenv/CHANGELOG.md
+node_modules/dotenv/config.d.ts
+node_modules/dotenv/config.js
+node_modules/dotenv/LICENSE
+node_modules/dotenv/README-es.md
+node_modules/dotenv/README.md
+node_modules/dotenv/lib/cli-options.js
+node_modules/dotenv/lib/env-options.js
+node_modules/dotenv/lib/main.d.ts
+node_modules/dotenv/lib/main.js
