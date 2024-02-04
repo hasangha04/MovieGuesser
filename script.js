@@ -1,8 +1,10 @@
+require('dotenv').config()
+
 const options = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxOGE0MzQ1YmJmY2RmYmVjNmI0MjU1NjM4OTJjODkxNiIsInN1YiI6IjY1YjU2ZjM1ZjY1OTZmMDE0OWZlMTI1NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.jdYM_1YApryb3TXt18Lai08nDYKfGct2R_6tpaP1wcs'
+      Authorization: process.env.MOVIE_DB_API_KEY
     }
   };
   
